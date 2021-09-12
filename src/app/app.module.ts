@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ChartModule } from 'angular-highcharts';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 import { HttpClientModule }   from '@angular/common/http';
 import { ApiService } from './api.service';
@@ -16,7 +17,9 @@ import { ApiService } from './api.service';
     BrowserModule,
     AppRoutingModule,
     ChartModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]

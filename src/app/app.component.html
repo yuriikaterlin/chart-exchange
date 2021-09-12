@@ -1,5 +1,17 @@
+<form [formGroup]="reactiveForm" novalidate>
 
- <button (click)="add()">Add Point!</button>
+    <label for="currency">First Name </label>
+  <select formControlName="currency">
+    <option *ngFor="let name of currencyList" [ngValue]="name">
+      {{ name }}
+    </option>
+  </select>
+    <label for="startdate">Start Date </label>
+    <input type="date" id="startdate" name="startdate" formControlName="startDate">
+    <label for="enddate">End Date </label>
+    <input type="date" id="enddate" name="enddate" formControlName="endDate">
+
+</form>
 <div [chart]="chart"></div>
 
 <router-outlet></router-outlet>

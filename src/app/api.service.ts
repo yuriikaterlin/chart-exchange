@@ -10,7 +10,11 @@ export class ApiService {
 
   constructor(private _http: HttpClient){ }
 
-  getData() {
-      return this._http.get(`${this.domain}NBUStatService/v1/statdirectory/exchange?valcode=USD&date=20210808&json`);
+  getData(currency: string, currentDate: string) {
+    return this._http.get(`${this.domain}NBUStatService/v1/statdirectory/exchange?valcode=${currency}&date=${currentDate}&json`);
+  }
+
+  getCurrencyList() {
+    return this._http.get('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchangenew?json');
   }
 }
