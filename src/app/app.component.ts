@@ -38,18 +38,25 @@ export class AppComponent {
   }
 
   getChartData () {
-      let currencyArray = [];
-      let start = Date.parse('2021-09-01')/1000;
-      let end = Date.parse('2021-09-08')/1000;
-      for (start; start <= end; start = start + 86400) {
-        let dateStr = new Date(start * 1000).toLocaleDateString("en-US",{ year: 'numeric', month: '2-digit', day: '2-digit' }).split('/').reverse().join('');
-        // @ts-ignore
-        this.apiService.getData(this.reactiveForm.get("currency").value, dateStr).subscribe((data:any) => {
-          this.chartData.push(data[0].rate)
-          this.chartxAxis.push(data[0].exchangedate)
-          this.createChart()
-        });
-      }
+    this.chartData = [];
+    let currencyArray = [];
+    let start = Date.parse(this.reactiveForm.get('startDate')?.value)/1000;
+    let end = Date.parse(this.reactiveForm.get('endDate')?.value)/1000;
+
+    for (start; start <= end; start = start + 86400) {
+      let arr = [];
+      let dateString = new Date(start * 1000).toLocaleDateString("en-US",{ year: 'numeric', month: '2-digit', day: '2-digit' }).split('/');
+      arr.push(dateString[2]);
+      arr.push(dateString[0]);
+      arr.push(dateString[1]);
+      let dateStr = arr.join('');
+      // @ts-ignore
+      this.apiService.getData(this.reactiveForm.get("currency").value, dateStr).subscribe((data:any) => {
+        this.chartData.push(data[0].rate)
+        this.chartxAxis.push(data[0].exchangedate)
+        this.createChart()
+      });
+    }
   }
 
     constructor(
@@ -80,7 +87,7 @@ export class AppComponent {
       },
       series: [
         {
-          name: 'Line 1',
+          name: `UAH to ${this.reactiveForm.get('currency')?.value}`,
           type: 'line',
           data: this.chartData
         }
