@@ -1,17 +1,70 @@
+<div class="container" >
 <form [formGroup]="reactiveForm" novalidate>
+  <mat-form-field appearance="fill">
+    <mat-select formControlName="currency" name="food" class="select-field">
+      <mat-option *ngFor="let food of currencyList" [value]="food">
+        {{food}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
-    <label for="currency">First Name </label>
-  <select formControlName="currency">
-    <option *ngFor="let name of currencyList" [ngValue]="name">
-      {{ name }}
-    </option>
-  </select>
-    <label for="startdate">Start Date </label>
-    <input type="date" id="startdate" name="startdate" formControlName="startDate">
-    <label for="enddate">End Date </label>
-    <input type="date" id="enddate" name="enddate" formControlName="endDate">
+  <mat-form-field class="form-field" appearance="fill">
+    <mat-label>First campaign</mat-label>
+    <mat-date-range-input
+      [formGroup]="reactiveForm"
+      [rangePicker]="campaignOnePicker">
+      <input matStartDate placeholder="Start date" formControlName="startDate">
+      <input matEndDate placeholder="End date" formControlName="endDate">
+    </mat-date-range-input>
+    <mat-datepicker-toggle matSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
+    <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
+  </mat-form-field>
 
+  
+  <mat-radio-group formControlName="mode"  aria-label="Select an option" class="radio-group">
+    <mat-radio-button class="radio-buttion-item" value="1">Chart</mat-radio-button>
+    <mat-radio-button class="radio-buttion-item" value="0">Table</mat-radio-button>
+  </mat-radio-group>
 </form>
-<div [chart]="chart"></div>
+</div>
+<div  *ngIf="reactiveForm.get('mode')?.value === '1'; else elseBlock" [chart]="chart"></div>
+<ng-template #elseBlock>
+
+<div class="table-wrapper">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="txt">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let element"> {{element.txt}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="rate">
+      <th mat-header-cell *matHeaderCellDef>Rate</th>
+      <td mat-cell *matCellDef="let element"> {{element.rate}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="cc">
+      <th mat-header-cell *matHeaderCellDef>Currency</th>
+      <td mat-cell *matCellDef="let element"> {{element.cc}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="exchangedate">
+      <th class mat-header-cell *matHeaderCellDef> Exchangedate </th>
+      <td mat-cell *matCellDef="let element"> {{element.exchangedate}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div> 
+</ng-template>
 
 <router-outlet></router-outlet>

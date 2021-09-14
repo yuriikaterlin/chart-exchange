@@ -1,0 +1,32 @@
+.container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+ 
+.form-field {
+    margin: 25px 15px 20px 20px;
+}
+
+.select-field {
+    padding: 0 5px 1px 5px;
+}
+
+.radio-group {
+    margin-bottom: 20px;
+}
+
+.radio-buttion-item {
+    margin-left: 10px;
+}
+
+.table-wrapper {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+table {
+    width: 80%;
+    margin: 20px auto;
+}

@@ -4,10 +4,17 @@ import { ChartModule } from 'angular-highcharts';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { MatSliderModule } from '@angular/material/slider';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatSelectModule} from '@angular/material/select';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatTableModule} from '@angular/material/table';
 
 import { HttpClientModule }   from '@angular/common/http';
 import { ApiService } from './api.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -19,7 +26,15 @@ import { ApiService } from './api.service';
     ChartModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSliderModule,
+    BrowserAnimationsModule,
+    MatDatepickerModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
+    MatRadioModule,
+    MatTableModule
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]
