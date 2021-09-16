@@ -11,11 +11,12 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator'; 
 
 import { HttpClientModule }   from '@angular/common/http';
 import { ApiService } from './api.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import {CdkTableModule} from '@angular/cdk/table'; 
 @NgModule({
   declarations: [
     AppComponent
@@ -34,7 +35,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatFormFieldModule,
     MatNativeDateModule,
     MatRadioModule,
-    MatTableModule
+    MatTableModule,
+    MatPaginatorModule,
+    CdkTableModule
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]

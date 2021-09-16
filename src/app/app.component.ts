@@ -28,8 +28,8 @@ export class AppComponent {
   dataSource = ELEMENT_DATA;
 
   reactiveForm = new FormGroup({
-    startDate: new FormControl('2021-09-01'),
-    endDate: new FormControl('2021-09-08'),
+    startDate: new FormControl(),
+    endDate: new FormControl(),
     currency: new FormControl('USD'),
     mode: new FormControl('1')
   })
@@ -51,7 +51,7 @@ export class AppComponent {
   getChartData () {
     this.chartData = [];
     this.tableData = [];
-    this.dataSource = ELEMENT_DATA;
+    this.dataSource = [];
     let start = Date.parse(this.reactiveForm.get('startDate')?.value)/1000;
     let end = Date.parse(this.reactiveForm.get('endDate')?.value)/1000;
 
@@ -83,6 +83,10 @@ export class AppComponent {
     // @ts-ignore
     console.log(this.chartData)
     this.chart = new Chart({
+      title:
+          {
+          text: 'Currency Exchange'
+          },
       xAxis: {
         type: 'datetime',
         dateTimeLabelFormats: { // don't display the dummy year
