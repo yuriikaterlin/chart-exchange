@@ -9,14 +9,15 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatNativeDateModule} from '@angular/material/core';
-import {MatRadioModule} from '@angular/material/radio';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator'; 
+import {MatButtonToggleModule} from '@angular/material/button-toggle'; 
 
 import { HttpClientModule }   from '@angular/common/http';
 import { ApiService } from './api.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {CdkTableModule} from '@angular/cdk/table'; 
+import { ChartsModule } from 'ng2-charts';
 @NgModule({
   declarations: [
     AppComponent
@@ -34,10 +35,11 @@ import {CdkTableModule} from '@angular/cdk/table';
     MatSelectModule,
     MatFormFieldModule,
     MatNativeDateModule,
-    MatRadioModule,
     MatTableModule,
     MatPaginatorModule,
-    CdkTableModule
+    CdkTableModule,
+    ChartsModule,
+    MatButtonToggleModule
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]

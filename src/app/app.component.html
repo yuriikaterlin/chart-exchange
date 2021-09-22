@@ -1,5 +1,8 @@
 <div class="container" >
 <form [formGroup]="reactiveForm" class="form-wrapper" novalidate>
+  
+  <!-- Select  -->
+  <div class="selector">
   <mat-form-field class="form-field" appearance="fill">
     <mat-label>Currency</mat-label>
     <mat-select formControlName="currency" name="food" class="select-field">
@@ -8,52 +11,76 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-
+</div>
+  <!-- Data Range -->
+  <div class="data-range-wrapper">
   <mat-form-field class="form-field" appearance="fill">
     <mat-label>Enter a date range</mat-label>
     <mat-date-range-input
       [formGroup]="reactiveForm"
       [rangePicker]="campaignOnePicker">
-      <input matStartDate placeholder="Start date" formControlName="startDate">
-      <input matEndDate placeholder="End date" formControlName="endDate">
+      <input matStartDate placeholder="Start date" formControlName="startDate" #startdate>
+      <input matEndDate placeholder="End date" formControlName="endDate" #enddate>
     </mat-date-range-input>
     <mat-datepicker-toggle matSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
     <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
   </mat-form-field>
-
+</div>
+  <!-- Toggle group -->
+  <div>
+    <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+      <mat-button-toggle  (click)="getChartData()" (click)="handleChart()" [disabled]="(startdate.value.length === 0 || enddate.value.length === 0)">Chart</mat-button-toggle>
+      <mat-button-toggle  (click)="getChartData()"  (click)="handleTable()" [disabled]="(startdate.value.length === 0 || enddate.value.length === 0)">Table</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
   
-  <mat-radio-group class='radio-group' formControlName="mode"  aria-label="Select an option" class="radio-group">
-    <mat-radio-button class="radio-buttion-item" value="1">Chart</mat-radio-button>
-    <mat-radio-button class="radio-buttion-item" value="0">Table</mat-radio-button>
-  </mat-radio-group>
 </form>
 </div>
-<div  *ngIf="reactiveForm.get('mode')?.value === '1'; else elseBlock" [chart]="chart"></div>
-<ng-template #elseBlock>
 
-<div class="table-wrapper">
-    
-  <table class="mat-elevation-z8">
-    <thead>
-       <tr>
-          <th>Name  </th>
-          <th>Rate  </th>
-          <th>Carency</th>
-          <th>Date</th>
-       </tr>
-    </thead>
-    <tbody>
-       <tr *ngFor="let item of dataSource">
-          <td>{{ item.txt }}</td>
-          <td>{{ item.rate }}</td>
-          <td>{{ item.cc }}</td>
-          <td>{{ item.exchangedate }}</td>
-       </tr>
-    </tbody>
- </table>
+  <!-- Chart -->
+  <div *ngIf="displayChart" class='canvas-chart'>
 
- 
-</div> 
-</ng-template>
+    <canvas baseChart width="500" height="200"
+  
+      [datasets]="lineChartData"
+  
+      [labels]="lineChartLabels"
+  
+      [options]="lineChartOptions"
+  
+      [legend]="lineChartLegend"
+  
+      [chartType]="lineChartType"
+  
+      [plugins]="lineChartPlugins">
+  
+    </canvas>
+  
+  </div>
 
+    <!-- Table -->
+    <div *ngIf="displayTable"> 
+      
+        <div class="table-wrapper">
+                <table class="mat-elevation-z8">
+              <thead>
+                <tr>
+                    
+                    <th>Rate  </th>
+                    <th>Carency</th>
+                  
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of dataSource">
+                    <td>{{ item.rate }}</td>
+                    <td>{{ item.exchangedate }}</td>
+                </tr>
+              </tbody>
+          </table>
+        </div> 
+      
+    </div>
 <router-outlet></router-outlet>
+   
+
